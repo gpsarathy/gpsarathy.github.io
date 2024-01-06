@@ -1,0 +1,37 @@
+<div class="side-bar">
+    <a href="#about" >About</a>
+    <a href="#experience" >Experience</a>	
+    <a href="#" >Skills</a>
+    <a href="#" >Contact</a>
+</div>
+<style>
+    .side-bar{
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        margin-left: -180px;
+        top: 50%;
+        gap: 30px;
+        
+        
+        /* .item:nth-child(5n), .item:last-child {
+        border-right: none; */
+    /* } */
+    }
+    .side-bar a{
+        /* border : 2px solid; */
+        border-bottom: 2px  solid;
+        /* border-width: 2px; */
+        text-align: right;
+        padding: 20px;
+        color: black;
+    }
+    .side-bar a:hover{
+        background-color: black;
+        color: white;
+        transition: all 0.5s;
+    }
+    .side-bar a:last-child{
+        border-bottom: none;
+    }
+</style>
