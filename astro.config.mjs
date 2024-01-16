@@ -4,12 +4,17 @@ import sitemap from '@astrojs/sitemap';
 
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import solidJs from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap(), react(), tailwind(), solidJs()],
+  integrations: [mdx(), sitemap(), react(),
+  tailwind(
+    {
+      applyBaseStyles: false,
+    }
+  ),
+  ],
   redirects: {
     '/': '/about'
   }
