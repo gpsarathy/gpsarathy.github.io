@@ -1,4 +1,4 @@
-<div class="side-bar *:hover:bg-black *:hover:dark:bg-white">
+<div class="side-bar ">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
@@ -16,9 +16,12 @@
         border-bottom: 2px solid;
         text-align: right;
         padding: 20px;
+        
     }
     .side-bar a:hover {
-        transition: all 0.5s;
+        background-color: hsl(var(--foreground));
+        color: hsl(var(--background));
+        transition: all 0.2s;
     }
     .side-bar a:last-child {
         border-bottom: none;
