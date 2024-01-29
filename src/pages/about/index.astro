@@ -2,6 +2,7 @@
 import { SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/BlogPost.astro";
 import SideNav from "./sideNav.astro";
+import MySkills from './MySkills'
 
 const yearsOfExperience = (
 	(new Date().getTime() - new Date(2018, 0, 1).getTime()) /
@@ -45,7 +46,9 @@ const yearsOfExperience = (
 		Experience of developing modular code with coding standards by following
 		the industry best practices
 	</p>
+	<br>
 	<h5 id="experience">Work Experience</h5>
+	<br>
 	<ol class="relative border-l border-gray-200">
 		<li class="mb-10 ml-6">
 			<span
@@ -139,5 +142,8 @@ const yearsOfExperience = (
 			</p>
 		</li>
 	</ol>
-	<h5>Tech / Skills</h5>
+	<br>
+	<h5 id="skills">Tech / Skills Exposure</h5>
+	<br>
+	<MySkills client:only="react"/>
 </Layout>
