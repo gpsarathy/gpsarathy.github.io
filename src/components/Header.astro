@@ -1,8 +1,9 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
-import { ModeToggle } from './ModeToggle';
+import { ModeToggle } from './react/ui/ModeToggle';
 
+const Title = SITE_TITLE.slice(0,SITE_TITLE.length-1)
 ---
 <script is:inline>
 	const getThemePreference = () => {
@@ -21,13 +22,17 @@ import { ModeToggle } from './ModeToggle';
 		});
 		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 	}
+
+	document.addEventListener('astro:before-swap', ev => {
+	const isDark = getThemePreference() === 'dark';
+	ev.newDocument.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+  });
 </script>
 <header>
 	<nav>
-		<h2><b><a href="/">{SITE_TITLE}</a></b></h2>
+		<h2><b><a href="/" class="blink">{Title}</a></b></h2>
 		<div class="internal-links">
 			<HeaderLink href="/about">About</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
 		</div>
 		
 		<div class="social-links">
@@ -99,5 +104,17 @@ import { ModeToggle } from './ModeToggle';
 		.social-links {
 			display: none;
 		}
+	}
+  	@keyframes blink {
+	50% {
+		color: black;
+		background-color: white;
+	}
+	}
+	.blink::after {
+		content: "v";
+		color: white;
+		background-color: black;
+		animation: blink 1.5s steps(1,jump-end) 0s infinite;
 	}
 </style>

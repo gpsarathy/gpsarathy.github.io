@@ -1,8 +1,28 @@
-<div class="side-bar ">
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+<script>
+    const nav = document.getElementById("sideNav")?.children;
+
+    let nodes = nav ?? [];
+    for (let node of nodes) {
+        if (node instanceof HTMLButtonElement) {
+            let id = node.getAttribute("id");
+            let v = id?.split("-")[0] ?? "";
+
+            node.addEventListener("click", (e) => {
+                let elePos = document.getElementById(v);
+                if (elePos) {
+                    const { left, top } = elePos.getBoundingClientRect();
+                    scrollTo({ top, left, behavior: "smooth" });
+                }
+            });
+        }
+    }
+</script>
+
+<div id="sideNav" class="side-bar">
+    <button id="about-ref">About</button>
+    <button id="experience-ref">Experience</button>
+    <button id="skills-ref">Skills</button>
+    <button id="contact-ref">Contact</button>
 </div>
 <style>
     .side-bar {
@@ -12,18 +32,17 @@
         margin-left: -180px;
         gap: 30px;
     }
-    .side-bar a {
+    .side-bar button {
         border-bottom: 2px solid;
         text-align: right;
         padding: 20px;
-        
     }
-    .side-bar a:hover {
+    .side-bar button:hover {
         background-color: hsl(var(--foreground));
         color: hsl(var(--background));
         transition: all 0.2s;
     }
-    .side-bar a:last-child {
+    .side-bar button:last-child {
         border-bottom: none;
     }
 </style>
