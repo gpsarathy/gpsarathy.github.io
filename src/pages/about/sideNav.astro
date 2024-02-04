@@ -7,7 +7,7 @@
             let id = node.getAttribute("id");
             let v = id?.split("-")[0] ?? "";
 
-            node.addEventListener("click", (e) => {
+            node.addEventListener("click", () => {
                 let elePos = document.getElementById(v);
                 if (elePos) {
                     const { left, top } = elePos.getBoundingClientRect();

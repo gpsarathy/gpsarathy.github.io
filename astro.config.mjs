@@ -9,7 +9,7 @@ import solidJs from "@astrojs/solid-js";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://gpsarathy.github.io',
-  // base: '/site',
+  base: '/site',
   integrations: [mdx(), sitemap(), react(
     {
       include: ['**/react/*'],
