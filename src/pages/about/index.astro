@@ -1,8 +1,8 @@
 ---
 import { SITE_TITLE } from "../../consts";
-import Layout from "../../layouts/BlogPost.astro";
+import BlogPost from "../../layouts/BlogPost.astro";
 import SideNav from "./sideNav.astro";
-import MySkills from './MySkills'
+import MySkills from '@/components/react/MySkills'
 
 const yearsOfExperience = (
 	(new Date().getTime() - new Date(2018, 0, 1).getTime()) /
@@ -10,13 +10,14 @@ const yearsOfExperience = (
 ).toFixed(1);
 ---
 
-<Layout
+<BlogPost
 	title="About Me"
 	description={SITE_TITLE}
 	pubDate={new Date("January 2 2023")}
 	heroImage="/about_dev.png"
+	transition:animate="slide"
 >
-	<p id="about" class="">
+	<p id="about">
 		<SideNav />
 		A passionate learner of technologies. Studied Engineering in Electrical and
 		Electronics. Currently working as full stack software developer and having
@@ -143,7 +144,8 @@ const yearsOfExperience = (
 		</li>
 	</ol>
 	<br>
-	<h5 id="skills">Tech / Skills Exposure</h5>
+	<h5 >Tech / Skills Exposure</h5>
 	<br>
-	<MySkills client:only="react"/>
-</Layout>
+	<div id="skills">
+		<MySkills client:only="react"/></div>
+</BlogPost>
