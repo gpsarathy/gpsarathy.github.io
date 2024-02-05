@@ -20,6 +20,6 @@ export default defineConfig({
     include: ['**/solid/*'],
   })],
   redirects: {
-    '/site': '/site/about'
+    '/': '/about'
   }
 });
