@@ -11,40 +11,45 @@ export default function(){
     <AccordionItem value="item-1" >
       <AccordionTrigger>Programming Languages</AccordionTrigger>
       <AccordionContent>
-      Java, Javascript, Typescript, Python
+      Java, Javascript, Typescript, GoLang
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-2">
-      <AccordionTrigger>Scripting Languages</AccordionTrigger>
+      <AccordionTrigger>Technologies</AccordionTrigger>
       <AccordionContent>
-      Terraform, HTML, CSS, Shell, JSP
+      Web, REST API, GraphQL
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-3">
-      <AccordionTrigger>Frameworks and UI</AccordionTrigger>
+      <AccordionTrigger>Scripting Languages</AccordionTrigger>
       <AccordionContent>
-      Spring Boot, NodeJS, ReactJS Angular 6+, Astro ( This site built on <b className=" text-lg">🚀</b> )
+      Terraform, HTML, CSS, Shell
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-4">
-      <AccordionTrigger>Persistence</AccordionTrigger>
+      <AccordionTrigger>Frameworks and UI</AccordionTrigger>
       <AccordionContent>
-      SQL, No-SQL, MySQL, MongoDB, Hibernate, Firestore, Firebase
+      Spring Boot, NodeJS, ReactJS, Angular 6, Astro ( This site built on <b className=" text-lg">🚀</b> )
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-5">
+      <AccordionTrigger>Persistence</AccordionTrigger>
+      <AccordionContent>
+      SQL, No-SQL, Postgres, MongoDB, Hibernate, Firestore, Firebase
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-6">
       <AccordionTrigger>Cloud & CI/CD</AccordionTrigger>
       <AccordionContent>
       Google Cloud Platform, AWS, Harness, Open-Shift Tekton
       </AccordionContent>
     </AccordionItem>
-    <AccordionItem value="item-6">
-      <AccordionTrigger>Others</AccordionTrigger>
+    <AccordionItem value="item-7">
+      <AccordionTrigger>Other Interests</AccordionTrigger>
       <AccordionContent>
-      Basics of Flutter, Dart, Unreal Engine, C++ and Etc
+      ML (Python), Cross Platform development ( Basics of Flutter, Dart, ReactNaive), Game Development (Unreal Engine, C++, Godot and Etc)
       </AccordionContent>
     </AccordionItem>
   </Accordion>
-
   </>
 }
