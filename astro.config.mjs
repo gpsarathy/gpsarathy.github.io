@@ -18,7 +18,7 @@ export default defineConfig({
   }), solidJs({
     include: ['**/solid/*'],
   })],
-  redirects: {
-    '/': '/about'
-  }
+  // redirects: {
+  //   '/': '/about'
+  // }
 });

@@ -1,0 +1,37 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+
+
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={'LLM Chat'} description={'LLM Chat'} />
+	</head>
+	<body>
+		<Header title={'LLM Chat'} />
+		<main>
+			<h1>LLM Chat</h1>
+      <p>
+        This page is a simple chat interface with a Large Language Model (LLM). You can ask questions and get responses in real-time.
+      </p>
+      <p>
+        To start chatting, type your message in the input box below and hit enter.
+      </p>
+      <p>
+        <small>Note: Before using the chat, ensure you have the necessary API keys and configurations set up.</small>
+      </p>
+      <!-- Add your chat interface here -->
+      <div id="chat-interface">
+        <!-- Chat messages will be displayed here -->
+        <div id="messages"></div>
+        <!-- Input box for user messages -->
+        <input type="text" id="user-input" placeholder="Type your message..." />
+      </div>
+      <!-- <script src="/js/chat.js"></script> Link to your chat script -->
+		</main>
+		<Footer />
+	</body>
+</html>
