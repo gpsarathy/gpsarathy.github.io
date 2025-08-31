@@ -29,13 +29,13 @@ export default function(){
     <AccordionItem value="item-4">
       <AccordionTrigger>Frameworks and UI</AccordionTrigger>
       <AccordionContent>
-      Spring Boot, NodeJS, ReactJS, Angular 6, Astro ( This site built on <b className=" text-lg">🚀</b> )
+      Spring Boot, NodeJS, ReactJS, VueJs, Angular 6, Astro ( This site built on <b className=" text-lg">🚀</b> )
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-5">
       <AccordionTrigger>Persistence</AccordionTrigger>
       <AccordionContent>
-      SQL, No-SQL, Postgres, MongoDB, Hibernate, Firestore, Firebase
+      SQL, No-SQL, PostgreSQL, MongoDB, JPA, Firestore, Firebase
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-6">

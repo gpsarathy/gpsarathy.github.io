@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 import solidJs from "@astrojs/solid-js";
 
@@ -13,12 +13,11 @@ export default defineConfig({
     {
       include: ['**/react/*'],
     }
-  ), tailwind({
-    applyBaseStyles: false
-  }), solidJs({
+  ),solidJs({
     include: ['**/solid/*'],
   })],
   redirects: {
     '/': '/about'
-  }
+  },
+  vite: {    plugins: [tailwindcss()],  },
 });
