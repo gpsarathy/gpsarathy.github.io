@@ -6,6 +6,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import solidJs from "@astrojs/solid-js";
 
+import vue from '@astrojs/vue';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://gpsarathy.github.io',
@@ -13,9 +15,9 @@ export default defineConfig({
     {
       include: ['**/react/*'],
     }
-  ),solidJs({
+  ), solidJs({
     include: ['**/solid/*'],
-  })],
+  }), vue()],
   redirects: {
     '/': '/about'
   },

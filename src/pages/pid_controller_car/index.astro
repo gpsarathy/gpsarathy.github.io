@@ -1,0 +1,9 @@
+---
+
+import BlogPost from "@/layouts/BlogPost.astro"
+import PidControllerCar from "./pid_controller_car.vue"
+---
+
+<BlogPost title="PID Controller Car Simulation" pubDate={new Date("2025-09-07")} description="A simple car simulation using a PID controller to follow a track.">
+    <PidControllerCar client:load />
+</BlogPost>
