@@ -5,6 +5,12 @@ export class Car {
   speed: number; // pixels per frame
   length: number = 40;
   width: number = 20;
+  // simple tuning parameters
+  maxSpeed: number = 8;
+  accel: number = 0.25;
+  steeringRate: number = 0.04; // radians per frame for full steer input
+  friction: number = 0.98;
+  private pendingSteering: number = 0;
 
   constructor(x: number, y: number, angle: number = 0) {
     this.x = x;
@@ -13,10 +19,37 @@ export class Car {
     this.speed = 2;
   }
 
-  update(steeringAngle: number) {
-    this.angle += steeringAngle;
+  // update position and heading. If steeringAngle is provided it is used,
+  // otherwise any pending steering set via applySteering() is consumed.
+  update(steeringAngle?: number) {
+    const sa = typeof steeringAngle === 'number' ? steeringAngle : this.pendingSteering;
+    this.angle += sa;
     this.x += this.speed * Math.cos(this.angle);
     this.y += this.speed * Math.sin(this.angle);
+    this.pendingSteering = 0;
+  }
+
+  // Set an absolute speed value (clamped)
+  setSpeed(v: number) {
+    this.speed = Math.max(-this.maxSpeed, Math.min(this.maxSpeed, v));
+  }
+
+  // amount in range [-1, 1]; positive accelerates forward, negative brakes/reverses
+  applyThrottle(amount: number) {
+    if (!amount) {
+      // natural friction when no throttle
+      this.speed *= this.friction;
+    } else {
+      this.speed += amount * this.accel;
+    }
+    // clamp speed
+    if (this.speed > this.maxSpeed) this.speed = this.maxSpeed;
+    if (this.speed < -this.maxSpeed) this.speed = -this.maxSpeed;
+  }
+
+  // direction in [-1, 1] where -1 = full left, +1 = full right
+  applySteering(direction: number) {
+    this.pendingSteering = direction * this.steeringRate;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
