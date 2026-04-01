@@ -21,8 +21,6 @@ export default defineConfig({
   redirects: {
     '/': '/about'
   },
-  vite: {    plugins: [tailwindcss()],  },
-  experimental: {
-    viewTransitions: true,
-  },
+  vite: { plugins: [tailwindcss()], },
+  viewTransitions: true,
 });
