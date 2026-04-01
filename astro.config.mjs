@@ -22,4 +22,7 @@ export default defineConfig({
     '/': '/about'
   },
   vite: {    plugins: [tailwindcss()],  },
+  experimental: {
+    viewTransitions: true,
+  },
 });

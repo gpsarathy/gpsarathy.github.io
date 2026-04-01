@@ -4,10 +4,27 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
 
 // Discover markdown files within each subfolder of /src/pages/misc
 // Prefer `post.md` if present, otherwise pick the first `.md` file found.
 const mdModules = import.meta.glob('/src/pages/misc/*/*.md', { eager: true });
+
+// Import images from each subfolder with their image objects
+const imageModules = import.meta.glob('/src/pages/misc/*/*.{png,jpg,jpeg}', { 
+	eager: true
+});
+
+// Map images by folder
+const imagesByFolder: Record<string, Record<string, any>> = {};
+for (const path in imageModules) {
+	const match = path.match(/\/src\/pages\/misc\/([^\/]+)\/([^\/]+\.(png|jpg|jpeg))$/);
+	if (!match) continue;
+	const folder = match[1];
+	const filename = match[2];
+	imagesByFolder[folder] ??= {};
+	imagesByFolder[folder][filename] = (imageModules[path] as any).default;
+}
 
 const grouped = /** @type {Record<string, any[]>} */ ({});
 for (const path in mdModules) {
@@ -24,11 +41,19 @@ const posts = Object.keys(grouped)
 		const items = grouped[folder];
 		let pick = items.find((it: any) => it.path.endsWith('/post.md')) ?? items[0];
 		const fm = pick.mod.frontmatter ?? pick.mod;
+		let heroImage = fm.heroImage ?? fm.hero_image ?? fm.image ?? null;
+		
+		// Resolve relative image paths using imported images
+		if (heroImage && heroImage.startsWith('./')) {
+			const filename = heroImage.slice(2);
+			heroImage = imagesByFolder[folder]?.[filename] ?? null;
+		}
+		
 		return {
 			title: fm.title ?? folder,
 			date: fm.pubDate ? new Date(fm.pubDate) : new Date(0),
 			description: fm.description ?? fm.excerpt ?? '',
-			heroImage: fm.heroImage ?? fm.hero_image ?? fm.image ?? null,
+			heroImage: heroImage,
 			route: `/misc/${folder}/`,
 			slug: folder,
 		};
@@ -64,15 +89,34 @@ const posts = Object.keys(grouped)
 				margin-bottom: 1rem;
 				text-align: center;
 			}
-			ul li:first-child img {
+			ul li:first-child img,
+			ul li:first-child picture img {
 				width: 100%;
 			}
 			ul li:first-child .title {
 				font-size: 2.369rem;
 			}
-			ul li img {
+			.image-container {
+				aspect-ratio: 720 / 360;
+				overflow: hidden;
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
+			}
+			.image-container img,
+			.image-container picture img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			ul li img,
+			ul li picture,
+			ul li picture img {
+				margin-bottom: 0.5rem;
+				border-radius: 12px;
+				display: block;
+				max-width: 100%;
+				height: auto;
 			}
 			ul li a {
 				display: block;
@@ -91,6 +135,12 @@ const posts = Object.keys(grouped)
 				color: rgb(var(--accent));
 			}
 			ul a:hover img {
+				box-shadow: var(--box-shadow);
+			}
+			ul a:hover picture img {
+				box-shadow: var(--box-shadow);
+			}
+			ul a:hover .image-container {
 				box-shadow: var(--box-shadow);
 			}
 			@media (max-width: 720px) {
@@ -118,9 +168,11 @@ const posts = Object.keys(grouped)
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`${import.meta.env.BASE_URL}${post.route}`}>
+								<a href={post.route}>
 									{post.heroImage ? (
-										<img width={720} height={360} src={`${import.meta.env.BASE_URL}/${post.heroImage}`} alt="" />
+										<div class="image-container">
+											<Image width={720} height={360} src={post.heroImage} alt={post.title} />
+										</div>
 									) : null}
 									<h4 class="title">{post.title}</h4>
 									<p class="date">
